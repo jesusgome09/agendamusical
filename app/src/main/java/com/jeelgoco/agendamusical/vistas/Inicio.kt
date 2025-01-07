@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.jeelgoco.agendamusical.datos.MyViewModel
 
@@ -53,7 +54,13 @@ private class Inicio {
                 .background(Color.Green)
 
         ) {
-            Text(text = "Informacion Relevante")
+            Box(modifier = Modifier.fillMaxSize()) {
+                Text(
+                    text = "Bienvenido a la agenda musical",
+                    modifier = Modifier.align(Alignment.Center),
+                    fontSize = 20.sp
+                )
+            }
         }
 
     }

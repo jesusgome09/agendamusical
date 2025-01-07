@@ -17,16 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.jeelgoco.agendamusical.MainActivity
 import com.jeelgoco.agendamusical.datos.MyViewModel
-import com.jeelgoco.agendamusical.datos.SongImportant
+import com.jeelgoco.agendamusical.datos.Song
 
 
 @Composable
 fun VistaCancion(navController: NavController, id: Int, viewModel: MyViewModel) {
-
 
 
     val song by viewModel.songTitles.observeAsState(initial = emptyList())
@@ -40,10 +37,23 @@ class Letras {
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
-    fun Main(navController: NavController, song: List<SongImportant>, id: Int) {
+    fun Main(navController: NavController, song: List<Song>, id: Int) {
+
+        var titulo = " NA"
+        var contenido = " NA"
+        var creador = " NA"
+
+        for (i in song) {
+            if (i.id == id) {
+                titulo = i.title
+                contenido = i.contenido
+                creador = i.creador
+            }
+        }
+
         Scaffold(
-            topBar = { TopBar(navController = navController, song, id) },
-            content = { Contenido(song, id) }
+            topBar = { TopBar(navController = navController, titulo) },
+            content = { Contenido(contenido) }
 
         )
 
@@ -52,9 +62,11 @@ class Letras {
     @SuppressLint("RestrictedApi")
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun TopBar(navController: NavController, song: List<SongImportant>, id: Int) {
+    fun TopBar(navController: NavController, titulo: String) {
+
+
         TopAppBar(
-            title = { Text(text = song[id].title) },
+            title = { Text(text = titulo) },
             navigationIcon = {
                 IconButton(onClick = { navController.navigate("Inicio") }) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -68,8 +80,8 @@ class Letras {
     }
 
     @Composable
-    fun Contenido(song: List<SongImportant>, id: Int) {
-        Text(text = song[id].contenido)
+    fun Contenido(contenido: String) {
+        Text(text = contenido)
 
     }
 
