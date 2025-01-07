@@ -20,25 +20,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.jeelgoco.agendamusical.MainActivity
 import com.jeelgoco.agendamusical.datos.MyViewModel
 
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun VistaInicioPreview() {
-    VistaInicio(navController = rememberNavController())
+    //VistaInicio(navController = rememberNavController())
 }
 
 @Composable
-fun VistaInicio(navController: NavController) {
+fun VistaInicio(navController: NavController, viewModel: MyViewModel) {
 
     Column {
         Inicio().PanelInformacion()
-        Inicio().PanelListado(navController)
+        Inicio().PanelListado(navController, viewModel)
     }
 
 }
@@ -64,10 +61,8 @@ private class Inicio {
 
     @Composable
     fun PanelListado(
-        navController: NavController
+        navController: NavController, viewModel: MyViewModel
     ) {
-
-        val viewModel : MyViewModel = viewModel()
 
 
         val songTitles by viewModel.songTitles.observeAsState(initial = emptyList())

@@ -1,12 +1,9 @@
 package com.jeelgoco.agendamusical.datos
 
-import android.annotation.SuppressLint
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.jeelgoco.agendamusical.MainActivity
 
 @Database(entities = [Song::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
@@ -22,7 +19,8 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

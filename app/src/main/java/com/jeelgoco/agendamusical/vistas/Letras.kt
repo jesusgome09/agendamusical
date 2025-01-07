@@ -25,13 +25,13 @@ import com.jeelgoco.agendamusical.datos.SongImportant
 
 
 @Composable
-fun VistaCancion(navController: NavController, path: Int) {
+fun VistaCancion(navController: NavController, id: Int, viewModel: MyViewModel) {
 
 
-    val viewModel = MyViewModel(MainActivity())
+
     val song by viewModel.songTitles.observeAsState(initial = emptyList())
 
-    Letras().Main(navController, song, path)
+    Letras().Main(navController, song, id)
 
 }
 

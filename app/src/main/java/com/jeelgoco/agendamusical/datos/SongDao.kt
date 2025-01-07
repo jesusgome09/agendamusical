@@ -2,6 +2,7 @@ package com.jeelgoco.agendamusical.datos
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
@@ -9,19 +10,17 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SongDao {
-    @Query("SELECT * FROM songs")
+    @Query("SELECT * FROM canciones")
     fun getAll(): Flow<List<Song>>
 
-    @Query("SELECT * FROM songs")
-    fun getImportante(): List<SongImportant>
+    @Query("SELECT * FROM canciones")
+    fun getImportante(): Flow<List<SongImportant>>
 
 
-    @Insert //(onConflict = OnConflictStrategy.REPLACE)
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSong(song: Song)
 
-    @Query("DELETE FROM songs")
+    @Query("DELETE FROM canciones")
     suspend fun deleteAll()
-
-
 
 }
