@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "898174160580",
+    "project_id": "agenda-musical-583bc",
+    "storage_bucket": "agenda-musical-583bc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898174160580:android:5e9011a8f340c5e134c391",
+        "android_client_info": {
+          "package_name": "com.jeelgoco.agendamusical"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjsPcgQZoDdyddqDVZVpVIPAGED4gXFnc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
