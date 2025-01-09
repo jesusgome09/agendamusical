@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -48,7 +47,7 @@ fun vistaprevia() {
         Song(
             1,
             "Cancion 1",
-            "Aquí estás \nTe vemos mover \nTe adoraré \nTe adoraré \n\nAquí estás \nObrando en mí \nTe adoraré Te adoraré Aquí estás Te vemos mover Te adoraré Te adoraré Aquí estás Obrando en mí Te adoraré Te adoraré (Y Te llamamos) Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Aquí estás Sanando mi corazón Te adoraré Te adoraré Aquí estás Tocando mi corazón Te adoraré Te adoraré (Te llamamos) Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Aquí estás Tocando mi corazón Te adoraré Te adoraré (Aquí estás) aquí estás Sanando mi corazón Te adoraré Te adoraré (Hoy y siempre, Te llamamos) Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Así eres Tú (así eres Tú) Así eres Tú (así eres Tú) Así eres Tú (así eres Tú) Así eres Tú (así eres Tú) Aunque no pueda ver, estás obrando Aunque no pueda ver, estás obrando Siempre estás, siempre estás obrando Siempre estás, siempre estás obrando Aunque no pueda ver, estás obrando Aunque no pueda ver, estás obrando Siempre estás, siempre estás obrando Siempre estás, siempre estás obrando Aunque no pueda ver, estás obrando Aunque no pueda ver, estás obrando Siempre estás, siempre estás obrando Siempre estás, siempre estás obrando Aunque no pueda ver, estás obrando Aunque no pueda ver, estás obrando Siempre estás, siempre estás obrando Siempre estás, siempre estás obrando Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Oh Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Oh Solo así eres Tú (así eres Tú) Así eres Tú (así eres Tú) Así eres Tú (así eres Tú) Así eres Tú (así eres Tú).".trimIndent(),
+            "Aquí estás \\nTe vemos mover \\nTe adoraré \\nTe adoraré  Aquí estás Obrando en mí Te adoraré Te adoraré  Aquí estás Te vemos mover Te adoraré Te adoraré  Aquí estás Obrando en mí Te adoraré Te adoraré  (Y Te llamamos) Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú  Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú  Aquí estás Sanando mi corazón Te adoraré Te adoraré  Aquí estás Tocando mi corazón Te adoraré Te adoraré  (Te llamamos) Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú  Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú  Aquí estás Tocando mi corazón Te adoraré Te adoraré  (Aquí estás) aquí estás Sanando mi corazón Te adoraré Te adoraré  (Hoy y siempre, Te llamamos) Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú  Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú  Así eres Tú (así eres Tú) Así eres Tú (así eres Tú) Así eres Tú (así eres Tú) Así eres Tú (así eres Tú)  Aunque no pueda ver, estás obrando Aunque no pueda ver, estás obrando Siempre estás, siempre estás obrando Siempre estás, siempre estás obrando  Aunque no pueda ver, estás obrando Aunque no pueda ver, estás obrando Siempre estás, siempre estás obrando Siempre estás, siempre estás obrando  Aunque no pueda ver, estás obrando Aunque no pueda ver, estás obrando Siempre estás, siempre estás obrando Siempre estás, siempre estás obrando  Aunque no pueda ver, estás obrando Aunque no pueda ver, estás obrando Siempre estás, siempre estás obrando Siempre estás, siempre estás obrando  Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú  Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú  Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Oh  Milagroso, abres camino Cumples promesas Luz en tinieblas Mi Dios, así eres Tú Oh  Solo así eres Tú (así eres Tú) Así eres Tú (así eres Tú) Así eres Tú (así eres Tú) Así eres Tú (así eres Tú)".trimIndent(),
             "Creador 1"
         ),
         Song(2, "Cancion 2", "Contenido 2", "Creador 2"),
@@ -79,7 +78,13 @@ class Letras {
         Scaffold(
 
             topBar = { TopBar(navController = navController, titulo) },
-            content = { Contenido(contenido, modifier = Modifier.padding(it).fillMaxSize()) }
+            content = {
+                Contenido(
+                    contenido, modifier = Modifier
+                        .padding(it)
+                        .fillMaxSize()
+                )
+            }
 
         )
 
@@ -109,13 +114,16 @@ class Letras {
     fun Contenido(contenido: String, modifier: Modifier) {
 
 
+        val texto = contenido.replace("\\n", "\n")
         LazyColumn(modifier = modifier) {
-            item {
 
-                BasicText(
-                    text = contenido, modifier = Modifier
+
+            item {
+                Text(
+                    text = texto,
+                    modifier = Modifier
                         .padding(horizontal = 12.dp, vertical = 7.dp),
-                    style = TextStyle(fontSize = 20.sp)
+                    fontSize = 20.sp
                 )
 
             }

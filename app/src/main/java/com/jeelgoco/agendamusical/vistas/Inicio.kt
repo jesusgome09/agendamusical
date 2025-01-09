@@ -68,17 +68,10 @@ fun VistaInicio(navController: NavController, myViewModel: MyViewModel) {
         )
     },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = { /*TODO*/ },
-                shape = RoundedCornerShape(30.dp),
-                modifier = Modifier
-                    .offset(y=(70).dp)
-            ) {
-                Icon(Icons.Filled.AddCircle, contentDescription = "Add")
-            }
+            Sobrepuestos().FabAdd()
         },
         floatingActionButtonPosition = androidx.compose.material3.FabPosition.Center,
-        bottomBar = { BotonDebajo() }
+        bottomBar = { Sobrepuestos().BotonDebajo() }
     )
 
 }
@@ -89,7 +82,9 @@ private class Inicio {
     @Composable
     fun VistaCompuesta(navController: NavController, myViewModel: MyViewModel, modifier: Modifier) {
 
-        Column(modifier = modifier) {
+        Column(modifier = modifier
+            .background( Color(0xFFB0A4FD))
+        ) {
             Inicio().Saludo(name = "Jesus")
             Inicio().PanelVerso()
             Inicio().TextoIntermedio()
@@ -97,63 +92,6 @@ private class Inicio {
         }
 
     }
-
-    @Composable
-    fun BotonDebajo() {
-
-        BottomAppBar(
-            containerColor = Color.Transparent,
-            tonalElevation = 8.dp
-
-        ) {
-
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Filled.Home, contentDescription = "Home")
-            }
-
-            Spacer(modifier = Modifier.weight(1f, true))
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Filled.Face, contentDescription = "Gallery")
-            }
-
-            Spacer(modifier = Modifier.weight(1f, true))
-            Spacer(modifier = Modifier.weight(1f, true))
-
-            Spacer(modifier = Modifier.weight(1f, true))
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Filled.Search, contentDescription = "search")
-            }
-
-            Spacer(modifier = Modifier.weight(1f, true))
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Filled.Settings, contentDescription = "Config")
-            }
-
-        }
-    }
-
-
-    @Composable
-    fun PanelInformacion() {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(150.dp)
-                .background(Color.Green)
-
-        ) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                Text(
-                    text = "Bienvenido a la agenda musical",
-                    modifier = Modifier.align(Alignment.Center),
-                    fontSize = 20.sp
-                )
-            }
-        }
-
-    }
-
-
 
     @Composable
     fun PanelListado(
@@ -166,7 +104,7 @@ private class Inicio {
 
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .defaultMinSize(minHeight = 250.dp)
 
         ) {
@@ -205,7 +143,7 @@ private class Inicio {
 
                 //icono de musica
                 Image(
-                    painter = painterResource(id = R.drawable.icon_music),
+                    painter = painterResource(id = R.drawable.icon_musicc),
                     contentDescription = null,
                     modifier = Modifier
                         .align(Alignment.CenterStart)
@@ -260,40 +198,10 @@ private class Inicio {
         )
         Spacer(modifier = Modifier.height(10.dp))
     }
-
-//TODO Aqui lo dejare por si acaso
-
-    @Composable
-    fun ViewSong(viewModel: SongListViewModel) {
-        val songs by viewModel.songs.collectAsState()
-        Log.i("FireBase", "Lista: $songs")
-
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .defaultMinSize(minHeight = 100.dp)
-        ) {
-            item {
-                Text(text = "--------Canciones-------")
-            }
-            items(songs) { song ->
-                Column(modifier = Modifier.background(Color.Cyan)) {
-                    song.titulo?.let { Text(text = it) }
-                    song.contenido?.let { Text(text = it) }
-                    song.creador?.let { Text(text = it) }
-
-                    if (songs.isEmpty()) {
-                        Text(text = "NA")
-                        Text(text = "NA")
-                        Text(text = "NA")
-
-                    }
-                }
-            }
-        }
-
-    }
 }
+
+//TODO Esto es para probar la vista
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Preview(showBackground = true, showSystemUi = true)
@@ -305,26 +213,26 @@ fun VistaPrevia() {
             Compilado(modifier = Modifier.padding(it))
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = { /*TODO*/ },
-                shape = RoundedCornerShape(30.dp),
-                modifier = Modifier
-                    .offset(y=(70).dp)
-            ) {
-                Icon(Icons.Filled.AddCircle, contentDescription = "Add")
-            }
+            Sobrepuestos().FabAdd()
         },
         floatingActionButtonPosition = androidx.compose.material3.FabPosition.Center,
-        bottomBar = { BotonDebajo() }
+        bottomBar = { Sobrepuestos().BotonDebajo() }
     )
 
 
 }
 
 
+@SuppressLint("InvalidColorHexValue")
 @Composable
 fun Compilado(modifier: Modifier) {
-    Column(modifier = modifier) {
+    Column(
+        modifier = modifier
+            .background( Color(0xFFB0A4FD))
+
+
+
+    ) {
         Saludo("Jesus")
         PanelVerso()
         TextoIntermedio()
@@ -371,39 +279,6 @@ fun TextoIntermedio() {
     Spacer(modifier = Modifier.height(10.dp))
 }
 
-@Composable
-fun BotonDebajo() {
-
-    BottomAppBar(
-        containerColor = Color.Transparent,
-        tonalElevation = 8.dp
-
-    ) {
-
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(Icons.Filled.Home, contentDescription = "Home")
-        }
-
-        Spacer(modifier = Modifier.weight(1f, true))
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(Icons.Filled.Face, contentDescription = "Gallery")
-        }
-
-        Spacer(modifier = Modifier.weight(1f, true))
-        Spacer(modifier = Modifier.weight(1f, true))
-
-        Spacer(modifier = Modifier.weight(1f, true))
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(Icons.Filled.Search, contentDescription = "search")
-        }
-
-        Spacer(modifier = Modifier.weight(1f, true))
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(Icons.Filled.Settings, contentDescription = "Config")
-        }
-
-    }
-}
 
 class prueba {
 
@@ -421,7 +296,7 @@ class prueba {
 
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .defaultMinSize(minHeight = 250.dp)
 
         ) {
@@ -461,7 +336,7 @@ class prueba {
 
                 //icono de musica
                 Image(
-                    painter = painterResource(id = R.drawable.icon_music),
+                    painter = painterResource(id = R.drawable.icon_musicc),
                     contentDescription = null,
                     modifier = Modifier
                         .align(Alignment.CenterStart)
