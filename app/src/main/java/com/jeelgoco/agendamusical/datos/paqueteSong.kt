@@ -17,15 +17,23 @@ import kotlinx.coroutines.flow.Flow
 
 @Entity(tableName = "canciones") //indica que esta clase representa una tabla de base de datos
 data class Song(
-    @PrimaryKey(autoGenerate = true) //indica que el campo id es la clave primaria y se genera automáticamente
-    val id: Int = 0,
+    @PrimaryKey() //indica que el campo id es la clave primaria y se genera automáticamente
+    val id: Int,
     val title: String,
     val contenido: String,
     val creador: String, // nueva columna
 
 
+)
 
-    )
+data class SongF(
+    var id: Int? = null,
+    var titulo: String? = null,
+    var contenido: String? = null,
+    var creador: String? = null
+) {
+    constructor() : this(null, null, null, null)
+}
 
 //DAO es Data Access Object
 
@@ -39,6 +47,9 @@ interface SongDao {
 
     @Query("DELETE FROM canciones")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM canciones WHERE id = :id")
+    suspend fun deleteSong(id: Int)
 
 }
 
@@ -62,7 +73,10 @@ abstract class AppDatabase : RoomDatabase() {
                     .addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-                            Log.d("MyViewModel", "onCreate: La base de datos y las tablas han sido creadas")
+                            Log.d(
+                                "MyViewModel",
+                                "onCreate: La base de datos y las tablas han sido creadas"
+                            )
                         }
                     })
                     .build()

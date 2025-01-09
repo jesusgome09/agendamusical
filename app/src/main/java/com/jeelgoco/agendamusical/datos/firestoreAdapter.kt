@@ -1,8 +1,6 @@
 package com.jeelgoco.agendamusical.datos
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.Firebase
@@ -19,12 +17,12 @@ class SongRepository {
     private val songCollection = db.collection("canciones")
 
 
-    suspend fun getSongs(): List<SongFireBase> {
+    suspend fun getSongs(): List<SongF> {
         return try {
             val snapshot = songCollection.get().await()
 
             snapshot.documents.mapNotNull { doc ->
-                doc.toObject(SongFireBase::class.java)
+                doc.toObject(SongF::class.java)
             }
         } catch (e: Exception) {
             Log.i("FireBase", "Error en getSongs: $e")
@@ -32,7 +30,7 @@ class SongRepository {
         }
     }
 
-    suspend fun addSong(song: SongFireBase) {
+    suspend fun addSong(song: SongF) {
         try {
             songCollection.document(song.id.toString()).set(song).await()
         } catch (e: Exception) {
@@ -40,11 +38,11 @@ class SongRepository {
         }
     }
 
-    fun getSongRealTime(callback: (List<SongFireBase>) -> Unit) {
+    fun getSongRealTime(callback: (List<SongF>) -> Unit) {
         songCollection.addSnapshotListener { snapshot, e ->
             if (snapshot != null) {
                 val songs = snapshot.documents.mapNotNull {
-                    it.toObject(SongFireBase::class.java)
+                    it.toObject(SongF::class.java)
                 }
                 callback(songs)
             }
@@ -55,8 +53,8 @@ class SongRepository {
 
 class SongListViewModel : ViewModel() {
     private val repository = SongRepository()
-    private val _songs = MutableStateFlow<List<SongFireBase>>(emptyList())
-    val songs: StateFlow<List<SongFireBase>> = _songs
+    private val _songs = MutableStateFlow<List<SongF>>(emptyList())
+    val songs: StateFlow<List<SongF>> = _songs
 
     init {
         fetchSongs()
@@ -72,7 +70,7 @@ class SongListViewModel : ViewModel() {
                 }
 
                 val songList = snapshot?.documents?.mapNotNull {doc ->
-                    doc.toObject(SongFireBase::class.java)
+                    doc.toObject(SongF::class.java)
                 } ?: emptyList()
 
                 _songs.value = songList //actualiza la lista de canciones
@@ -84,7 +82,7 @@ class SongListViewModel : ViewModel() {
         }
     }
 
-    fun addSong(song: SongFireBase) {
+    fun addSong(song: SongF) {
         viewModelScope.launch {
             repository.addSong(song)
             fetchSongs()
@@ -93,10 +91,3 @@ class SongListViewModel : ViewModel() {
 
 }
 
-data class SongFireBase(
-    val id: Int = 0,
-    val titulo: String = "",
-    val contenido: String = "",
-    val creador: String = ""
-
-)
