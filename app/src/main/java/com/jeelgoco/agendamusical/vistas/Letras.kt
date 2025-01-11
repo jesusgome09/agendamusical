@@ -105,7 +105,7 @@ class Letras {
             },
             modifier = Modifier
                 .shadow(elevation = 4.dp),
-            colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.Gray)
+
         )
 
     }

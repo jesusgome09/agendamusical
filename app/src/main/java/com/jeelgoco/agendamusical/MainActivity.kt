@@ -49,6 +49,7 @@ fun AppNavigation(modifier: Modifier, viewModel: MyViewModel) {
 
 
     Scaffold(
+
         floatingActionButton = {
 
             if (showBottomBar) {
@@ -75,7 +76,6 @@ fun AppNavigation(modifier: Modifier, viewModel: MyViewModel) {
         ) {
             composable("Inicio") {
                 showBottomBar = true
-                Log.i("Navigation", "Vamos a inicio -> $showBottomBar")
                 VistaInicio(navController, viewModel, modifier)
             }
             composable("Galeria") { TODO() }
