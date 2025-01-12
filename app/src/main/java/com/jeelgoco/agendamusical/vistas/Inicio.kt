@@ -18,7 +18,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,22 +30,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.jeelgoco.agendamusical.R
 import com.jeelgoco.agendamusical.datos.MyViewModel
-import com.jeelgoco.agendamusical.datos.Sincronizar
+import com.jeelgoco.agendamusical.datos.Sincronizador
 import com.jeelgoco.agendamusical.datos.Song
 import com.jeelgoco.agendamusical.datos.SongListViewModel
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun VistaInicio(navController: NavController, myViewModel: MyViewModel, modifier: Modifier) {
+fun VistaInicio(
+    navController: NavController,
+    myViewModel: MyViewModel,
+    modifier: Modifier,
+    firebaseViewModel: SongListViewModel
+) {
 
-    val firebaseViewModel: SongListViewModel = viewModel()
-    Sincronizar(localViewModel = myViewModel, firebaseViewModel = firebaseViewModel)
 
+    Sincronizador(localViewModel = myViewModel, firebaseViewModel = firebaseViewModel)
 
 
     Inicio().VistaCompuesta(
@@ -190,16 +192,7 @@ class Inicio {
 @Composable
 fun VistaPrevia() {
 
-    Scaffold(
-        content = {
-            Compilado(modifier = Modifier.padding(it))
-        },
-        floatingActionButton = {
-            Sobrepuestos().FabAdd()
-        },
-        floatingActionButtonPosition = androidx.compose.material3.FabPosition.Center,
-        //bottomBar = { Sobrepuestos().BotonDebajo() }
-    )
+    Compilado()
 
 
 }
@@ -207,9 +200,9 @@ fun VistaPrevia() {
 
 @SuppressLint("InvalidColorHexValue")
 @Composable
-fun Compilado(modifier: Modifier) {
+fun Compilado() {
     Column(
-        modifier = modifier.background(Color(0xFFB0A4FD))
+        modifier = Modifier.background(Color(0xFFB0A4FD))
 
 
     ) {

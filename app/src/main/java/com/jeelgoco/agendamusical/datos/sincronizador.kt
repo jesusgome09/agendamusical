@@ -7,11 +7,15 @@ import androidx.compose.runtime.livedata.observeAsState
 
 
 @Composable
-fun Sincronizar(localViewModel: MyViewModel, firebaseViewModel: SongListViewModel) {
-
+fun Sincronizador(
+    localViewModel: MyViewModel,
+    firebaseViewModel: SongListViewModel,
+) {
     val localSongs by localViewModel.songTitles.observeAsState(initial = emptyList())
     val firebaseSongs by firebaseViewModel.songs.collectAsState(initial = emptyList())
 
+    //exploramos la base de datos local comparando las id's con la db online de tal modo
+    // que si no lo encuentra lo inserta
     for (fireSong in firebaseSongs) {
         var found = false
         for (localSong in localSongs!!) {
@@ -26,16 +30,12 @@ fun Sincronizar(localViewModel: MyViewModel, firebaseViewModel: SongListViewMode
                     fireSong.titulo?.let { it2 ->
                         fireSong.contenido?.let { it3 ->
                             Song(
-                                id = it1,
-                                title = it2,
-                                contenido = it3,
-                                creador = it
+                                id = it1, title = it2, contenido = it3, creador = it
                             )
                         }
                     }
                 }
-            }
-                ?.let { localViewModel.insertSong(it) }
+            }?.let { localViewModel.insertSong(it) }
         }
     }
 
@@ -48,9 +48,19 @@ fun Sincronizar(localViewModel: MyViewModel, firebaseViewModel: SongListViewMode
             }
         }
         if (!found) {
-            localViewModel.deleteSong(localSong)
+            //localViewModel.deleteSong(localSong)
+            //lo de abajo es temporal
+            firebaseViewModel.addSong(
+                SongF(
+                    localSong.id,
+                    localSong.title,
+                    localSong.contenido,
+                    localSong.creador
+                )
+            )
         }
     }
-
 }
+
+
 

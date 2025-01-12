@@ -99,7 +99,7 @@ class Letras {
         TopAppBar(
             title = { Text(text = titulo) },
             navigationIcon = {
-                IconButton(onClick = { navController.navigate("Inicio") }) {
+                IconButton(onClick = { navController.popBackStack() }) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                 }
             },
